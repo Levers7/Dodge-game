@@ -1,0 +1,810 @@
+import random
+Restart = 4
+'''                                                Player'''
+x = 250
+y = 250
+xx=x
+yy=y
+xx1=x
+yy1=y
+P = 3
+Blue = "Blue"
+'''Right enemies'''
+z = 510
+z1 = 510
+z2 = 510
+r = random.uniform(5, 455)
+r1 = random.uniform(5, 455)
+r2 = random.uniform(5, 455)
+'''Up enemies'''
+zz = random.uniform(5, 455)
+zz1 = random.uniform(5, 455)
+zz2 = random.uniform(5, 455)
+rr = -10
+rr2 = -10
+rr1 = -10
+'''Left enemies'''
+u = -10
+u1 = -10
+u2 = -10
+o = random.uniform(5, 455)
+o1 = random.uniform(5, 455)
+o2 = random.uniform(5, 455)
+'''Down enemies'''
+uu = random.uniform(5, 455)
+uu1=random.uniform(5,455)
+uu2=random.uniform(5,455)
+oo= 510
+oo1=510
+oo2=510
+'''                                                       ALL enemies'''
+E = 5
+EE = 6
+Black = "Black"
+Black1 = "Gray"
+AA = random.uniform(-2,2)
+LL = random.uniform(500, 400)
+F = 500
+LE = 3.5
+
+################################### Menu ##################################
+PTCx1 = 180
+PTCy1 = 130
+PTCx2 = PTCx1 + 150
+PTCy2 = PTCy1 +80
+PTCcx = 225
+PTCcy = 140
+PTCy3 = PTCy1+150
+PTCy4 = PTCy2 +150
+Play = False
+X = 0
+Y=0
+How_to_Play = False
+Blackk = "Black"
+Gold = "Black"
+back = False
+###########################################################################
+import simplegui
+frame = simplegui.create_frame("", F, F)
+#time stuffs
+T = 0
+HT = T
+def time_handler():
+    global T
+    global HT
+    T = T + 0.5
+    HT = T
+timer = simplegui.create_timer(500, time_handler)
+timer.start()
+# initialize state
+current_key = ' '
+
+# event handlers
+def keydown(key):
+    """
+    Key down handler
+    """
+    global current_key
+    current_key = chr(key)
+
+def keyup(key):
+    """
+    Key up handler
+    """
+    global current_key
+    current_key = ' '
+   
+def draw(canvas):
+    """
+    Draw handler, takes canvas as input
+    """
+    global current_key
+    canvas.draw_text(current_key, [10, 25], 200, "Red")
+    if current_key == 'W':
+        print("eeeeeeee")
+        
+#####Player projectiles
+def mouse_handler(position):
+    pass
+#Player+movement
+def draw_handler(canvas):
+    #global variables
+    global x
+    global y
+    global xx
+    global yy
+    global xx1
+    global yy1
+    global current_key
+    
+    global Blue
+    global Restart
+    global E
+    global T
+    global HT
+    global P
+    global Black1
+    global Black
+    global AA
+    global LL
+    global F
+    global LE
+    global PTCx1
+    global Gold
+    global Blackk
+    global Y
+    global PTCy1
+    global PTCx2
+    global PTCy2
+    global PTCy3
+    global PTCy4
+    global X
+    global Play
+    global How_to_Play
+    global back
+    if current_key == 'W':
+            y = y - 1
+
+    elif current_key == 'S':
+            y = y + 1
+
+    elif current_key == 'A':
+            x = x - 1
+
+    elif current_key == 'D':
+            x = x + 1
+    canvas.draw_polygon([(x+P,y+P), (x+P,y-P), (x-P,y-P), (x-P,y+P)], P, Blue, Blue)
+    if Blue == "White":
+            x = 5000
+            y = 5000
+            T = 0
+            canvas.draw_text('Game Over', (120, 240), 50, 'Red')
+    if Play == False and How_to_Play == False and Restart == 4:
+        if round(x)-4 <= 0:
+            x = x+1
+        elif round(x)+4 >=500:
+            x = x-1
+        elif round(y)-4 <=0:
+            x = x+1
+        elif round(y)+4 >=500:
+            y = y-1
+        canvas.draw_polygon([[PTCx1, PTCy1], [PTCx2, PTCy1], [PTCx2, PTCy2], [PTCx1, PTCy2]], 3, Blackk)
+        T = 0
+        canvas.draw_text('Play', ([210, 185]), 50, Blackk)
+        if ((round(y)-P<=round(PTCy1)+80)and(round(y)-P>=round(PTCy1))and(round(x)-P<=round(PTCx1)+150)and(round(x)-P>=round(PTCx1))):
+            Blackk = "Gold"
+            if X == 5:
+                Play = True
+                X = 0
+            elif X == 4:
+                X= 4+1
+            elif X == 3:
+                X=3+1
+            elif X==2:
+                X=2+1
+            elif X==1:
+                X=1+1
+            elif X==0:
+                X=0+1
+        elif ((round(y)+P>=round(PTCy1))and(round(y)+P<=round(PTCy1)+80)and(round(x)+P>=round(PTCx1))and(round(x)+P<=round(PTCx1)+150)):
+            Blackk = "Gold"
+            if X == 5:
+                Play = True
+                X = 0
+            elif X == 4:
+                X= 4+1
+            elif X == 3:
+                X=3+1
+            elif X==2:
+                X=2+1
+            elif X==1:
+                X=1+1
+            elif X==0:
+                X=0+1
+        elif ((round(y)-P<=round(PTCy1)+80)and(round(y)-P>=round(PTCy1))and(round(x)-P<=round(PTCx1)+150)and (round(x)-P>=round(PTCx1))):
+            Blackk = "Gold"
+            if X == 5:
+                Play = True
+                X = 0
+            elif X == 4:
+                X= 4+1
+            elif X == 3:
+                X=3+1
+            elif X==2:
+                X=2+1
+            elif X==1:
+                X=1+1
+            elif X==0:
+                X=0+1
+        canvas.draw_polygon([[PTCx1, PTCy3], [PTCx2, PTCy3], [PTCx2, PTCy4], [PTCx1, PTCy4]], 3, Gold)
+        canvas.draw_text('How to', ([220, 305]), 25, Gold)
+        canvas.draw_text('Play', ([235, 345]), 25, Gold)
+        
+        if ((round(y)-P<=round(PTCy3)+80)and(round(y)-P>=round(PTCy3))and(round(x)-P<=round(PTCx1)+150)and(round(x)-P>=round(PTCx1))):
+            Gold = "Gold"
+            if Y == 5:
+                How_to_Play = True
+                Y = 0
+            elif Y == 4:
+                Y= 4+1
+            elif Y == 3:
+                Y=3+1
+            elif Y==2:
+                Y=2+1
+            elif Y==1:
+                Y=1+1
+            elif Y==0:
+                Y=0+1
+        elif ((round(y)+P>=round(PTCy3))and(round(y)+P<=round(PTCy3)+80)and(round(x)+P>=round(PTCx1))and(round(x)+P<=round(PTCx1)+150)):
+            Gold = "Gold"
+            if Y == 5:
+                How_to_Play = True
+                Y = 0
+            elif Y == 4:
+                Y= 4+1
+            elif Y == 3:
+                Y=3+1
+            elif Y==2:
+                Y=2+1
+            elif Y==1:
+                Y=1+1
+            elif Y==0:
+                Y=0+1
+        elif ((round(y)-P<=round(PTCy3)+80)and(round(y)-P>=round(PTCy3))and(round(x)-P<=round(PTCx1)+150)and (round(x)-P>=round(PTCx1))):
+            Gold = "Gold"
+            if Y == 5:
+                How_to_Play = True
+                Y = 0
+            elif Y == 4:
+                Y= 4+1
+            elif Y == 3:
+                Y=3+1
+            elif Y==2:
+                Y=2+1
+            elif Y==1:
+                Y=1+1
+            elif Y==0:
+                Y=0+1
+    elif How_to_Play == True:
+        if round(x)-4 <= 0:
+            x = x+1
+        elif round(x)+4 >=500:
+            x = x-1
+        elif round(y)-4 <=0:
+            x = x+1
+        elif round(y)+4 >=500:
+            y = y-1
+        canvas.draw_text('Back', ([15, 495]), 24, "Black")
+        canvas.draw_text('Goal: Survive', ([180, 150]), 30, "Black")
+        canvas.draw_text('Move with WASD', ([180, 200]), 29, "Black")
+        if ((round(y)-P<=round(495))and(round(y)-P>=round(495)-25)and(round(x)-P<=round(15)+25)and(round(x)-P>=round(15))):
+            back = True
+        elif ((round(y)+P>=round(495)-25)and(round(y)+P<=round(495))and(round(x)+P>=round(15))and(round(x)+P<=round(15)+25)):
+            back = True
+        elif ((round(y)-P<=round(495))and(round(y)-P>=round(495)-25)and(round(x)-P<=round(15)+25)and (round(x)-P>=round(15))):
+            back = True
+        if back == False:
+            if Y == 5:
+                canvas.draw_text('How to Play', ([150, 40]), 40, "Black")
+                Y = 5
+            elif Y == 4:
+                canvas.draw_polygon([[PTCx1, PTCy3], [PTCx2, PTCy3], [PTCx2, PTCy4], [PTCx1, PTCy4]], 3, "Gray")
+                canvas.draw_text('How to', ([220, 305]), 25, "Gray")
+                canvas.draw_text('Play', ([235, 345]), 25, "Gray")
+                Y= 4+1
+            elif Y == 3:
+                canvas.draw_polygon([[PTCx1, PTCy3], [PTCx2, PTCy3], [PTCx2, PTCy4], [PTCx1, PTCy4]], 3, "Gray")
+                canvas.draw_text('How to', ([220, 305]), 25, "Gray")
+                canvas.draw_text('Play', ([235, 345]), 25, "Gray")
+                Y=3+1
+            elif Y==2:
+                canvas.draw_polygon([[PTCx1, PTCy3], [PTCx2, PTCy3], [PTCx2, PTCy4], [PTCx1, PTCy4]], 3, "Gray")
+                canvas.draw_text('How to', ([220, 305]), 25, "Gray")
+                canvas.draw_text('Play', ([235, 345]), 25, "Gray")
+                Y=2+1
+            elif Y==1:
+                canvas.draw_polygon([[PTCx1, PTCy3], [PTCx2, PTCy3], [PTCx2, PTCy4], [PTCx1, PTCy4]], 3, "Gray")
+                canvas.draw_text('How to', ([220, 305]), 25, "Gray")
+                canvas.draw_text('Play', ([235, 345]), 25, "Gray")
+                Y=1+1
+            elif Y==0:
+                canvas.draw_polygon([[PTCx1, PTCy3], [PTCx2, PTCy3], [PTCx2, PTCy4], [PTCx1, PTCy4]], 3, "Gray")
+                canvas.draw_text('How to', ([220, 305]), 25, "Gray")
+                canvas.draw_text('Play', ([235, 345]), 25, "Gray")
+                Y=0+1
+        elif back == True:
+            How_to_Play = False
+            Play = False
+            back = False
+            X = 0
+            Y = 0
+            Gold = "Black"
+    elif Play == True:
+        if T<=0.5:
+            canvas.draw_polygon([[PTCx1, PTCy1], [PTCx2, PTCy1], [PTCx2, PTCy2], [PTCx1, PTCy2]], 3, "Gray")
+            canvas.draw_text('Play', ([210, 185]), 50, "Gray")
+        elif T>=0.5:
+            if Blue == "Blue":
+                Black = "Black"
+        #enemy
+            '''Right'''
+            global z
+            global z1
+            global z2
+            global r
+            global EE
+            global r1
+            global r2
+            '''canvas.draw_circle((z, r), E, E, "Black", "Black")'''
+            canvas.draw_polygon([[z-E, r-E], [z+E, r-E], [z+E, r+E], [z-E, r+E]], E, 'Black', 'Black')
+            canvas.draw_polygon([[z1-E, r1-E], [z1+E, r1-E], [z1+E, r1+E], [z1-E, r1+E]], E, 'Black', 'Black')
+            canvas.draw_polygon([[z2-E, r2-E], [z2+E, r2-E], [z2+E, r2+E], [z2-E, r2+E]], E, 'Black', 'Black')
+            #Slow
+            if Blue == "Blue":
+                z = z - random.uniform(0.9,1.3)
+            #Medium
+                z2 = z2 - random.uniform(1.3, 1.5)
+            #Fast
+                z1 = z1 - random.uniform(2, 1.5)
+        #Reset Right
+            if z <= -20:
+                z = random.uniform(500, 505)
+                r = random.uniform(5, 455)
+            if z2 <= -20:
+                z2 = random.uniform(504, 510)
+                r2 = random.uniform(5, 455)
+            if z1 <= -20:
+                z1 = random.uniform(505, 510)
+                r1 = random.uniform(5, 455)
+            '''Up'''
+            global zz
+            global zz1
+            global zz2
+            global rr
+            global rr1
+            global rr2
+            canvas.draw_polygon([[zz-E, rr-E], [zz+E, rr-E], [zz+E, rr+E], [zz-E, rr+E]], E, 'Black', 'Black')
+            canvas.draw_polygon([[zz1-E, rr1-E], [zz1+E, rr1-E], [zz1+E, rr1+E], [zz1-E, rr1+E]], E, 'Black', 'Black')
+            canvas.draw_polygon([[zz2-E, rr2-E], [zz2+E, rr2-E], [zz2+E, rr2+E], [zz2-E, rr2+E]], E, 'Black', 'Black')
+            #Slow
+            if Blue == "Blue":
+                rr = rr + random.uniform(0.9,1.3)
+            #Medium
+                rr1 = rr1 + random.uniform(1.3, 1.5)
+            #Fast
+                rr2 = rr2 + random.uniform(1.5, 2)
+        #Reset UP
+            if rr >= 520:
+                zz = random.uniform(5, 455)
+                rr = random.uniform(0, -7)
+            if rr1>=520:
+                zz1=random.uniform(5, 455)
+                rr1=random.uniform(-7, -10)
+            if rr2>=520:
+                zz2=random.uniform(5,455)
+                rr2=random.uniform(-7, -11)
+            '''Left'''
+            global u
+            global u1
+            global u2
+            global o
+            global o1
+            global o2
+            canvas.draw_polygon([[u-E, o-E], [u+E, o-E], [u+E, o+E], [u-E, o+E]], E, 'Black', 'Black')
+            canvas.draw_polygon([[u1-E, o1-E], [u1+E, o1-E], [u1+E, o1+E], [u1-E, o1+E]], E, 'Black', 'Black')
+            canvas.draw_polygon([[u2-E, o2-E], [u2+E, o2-E], [u2+E, o2+E], [u2-E, o2+E]], E, 'Black', 'Black')
+            #Slow
+            if Blue == "Blue":
+                u=u+random.uniform(0.9,1.3)
+            #Medium
+                u1=u1+random.uniform(1.3,1.5)
+            #Fast
+                u2=u2+random.uniform(1.5,2)
+        #Reset Left
+            if u >= 520:
+                u = random.uniform(0, -5)
+                o = random.uniform(5, 455)
+            if u2 >= 520:
+                u2 = random.uniform(-4, -10)
+                o2 = random.uniform(5, 455)
+            if u1 >= 520:
+                u1 = random.uniform(-5, -10)
+                o1 = random.uniform(5, 455)
+            '''Down'''
+            global uu
+            global uu1
+            global uu2
+            global oo
+            global oo1
+            global oo2
+            canvas.draw_polygon([[uu-E, oo-E], [uu+E, oo-E], [uu+E, oo+E], [uu-E, oo+E]], E, 'Black', 'Black')
+            canvas.draw_polygon([[uu1-E, oo1-E], [uu1+E, oo1-E], [uu1+E, oo1+E], [uu1-E, oo1+E]], E, 'Black', 'Black')
+            canvas.draw_polygon([[uu2-E, oo2-E], [uu2+E, oo2-E], [uu2+E, oo2+E], [uu2-E, oo2+E]], E, 'Black', 'Black')
+            #Slow
+            if Blue == "Blue":
+                oo= oo-random.uniform(0.9,1.3)
+            #Medium
+                oo1= oo1-random.uniform(1.3,1.5)
+            #Fast
+                oo2 = oo2-random.uniform(1.5,2)
+        #Reset Down
+            if oo <= -10:
+                uu = random.uniform(5, 455)
+                oo = random.uniform(510, 512)
+            if oo1<=-10:
+                uu1=random.uniform(5, 455)
+                oo1=random.uniform(507, 510)
+            if oo2<=-10:
+                uu2=random.uniform(5,455)
+                oo2=random.uniform(507, 511)
+        #player
+          #border
+            
+            if round(x)-4 <= 0:
+                HT = HT
+                print(HT)
+                print("Seconds")
+                Blue = "White"
+            elif round(x)+4 >=500:
+                HT = HT
+                print(HT)
+                print("Seconds")
+                Blue = "White"
+            elif round(y)-4 <=0:
+                HT = HT
+                print(HT)
+                print("Seconds")
+                Blue = "White"
+                Blue = "White"
+            elif round(y)+4 >=500:
+                HT = HT
+                print(HT)
+                print("Seconds")
+                Blue = "White"
+        #Player movement
+
+            
+            elif current_key == 'D' and current_key == 'W':
+                x = x + 1.5
+                y = y - 1.5
+
+            #(or round(z) or round(z)+1 or round(z)+2 or round(z)+3 or round(z)+4) (or round(x) or round(x)+1 or round(x)+2)
+            #canvas.draw_circle((x,y), P, P, Blue, Blue)
+
+        #Enemy 1 Right collision
+            global EE
+                #Right side
+            if ((round(y)-P<=round(r)+EE)and(round(y)-P>=round(r)-EE)and(round(x)-P<=round(z)+EE)and(round(x)-P>=round(z)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(r)-EE)and(round(y)+P<=round(r)+EE)and(round(x)+P>=round(z)-EE)and(round(x)+P<=round(z)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(r)+EE)and(round(y)-P>=round(r)-EE)and(round(x)-P<=round(z)+EE)and(round(x)-P>=round(z)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+
+        #Enemy 2 Right collision       
+
+            if ((round(y)-P<=round(r1)+EE)and(round(y)-P>=round(r1)-EE)and(round(x)-P<=round(z1)+EE)and(round(x)-P>=round(z1)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(r1)-EE)and(round(y)+P<=round(r1)+EE)and(round(x)+P>=round(z1)-EE)and(round(x)+P<=round(z1)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(r1)+EE)and(round(y)-P>=round(r1)-EE)and(round(x)-P<=round(z1)+EE)and(round(x)-P>=round(z1)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+
+        #Enemy 3 Right collision
+
+            if ((round(y)-P<=round(r2)+EE)and(round(y)-P>=round(r2)-EE)and(round(x)-P<=round(z2)+EE)and(round(x)-P>=round(z2)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(r2)-EE)and(round(y)+P<=round(r2)+EE)and(round(x)+P>=round(z2)-EE)and(round(x)+P<=round(z2)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(r2)+EE)and(round(y)-P>=round(r2)-EE)and(round(x)-P<=round(z2)+EE)and(round(x)-P>=round(z2)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+
+        #ENEMY 1 UP collision
+            if ((round(y)-P<=round(rr)+EE)and(round(y)-P>=round(rr)-EE)and(round(x)-P<=round(zz)+EE)and(round(x)-P>=round(zz)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(rr)-EE)and(round(y)+P<=round(rr)+EE)and(round(x)+P>=round(zz)-EE)and(round(x)+P<=round(zz)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(rr)+EE)and(round(y)-P>=round(rr)-EE)and(round(x)-P<=round(zz)+EE)and(round(x)-P>=round(zz)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+        #ENEMY 2 UP collision
+            if ((round(y)-P<=round(rr1)+EE)and(round(y)-P>=round(rr1)-EE)and(round(x)-P<=round(zz1)+EE)and(round(x)-P>=round(zz1)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(rr1)-EE)and(round(y)+P<=round(rr1)+EE)and(round(x)+P>=round(zz1)-EE)and(round(x)+P<=round(zz1)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(rr1)+EE)and(round(y)-P>=round(rr1)-EE)and(round(x)-P<=round(zz1)+EE)and(round(x)-P>=round(zz1)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+        #enemy 3 up collision
+            if ((round(y)-P<=round(rr2)+EE)and(round(y)-P>=round(rr2)-EE)and(round(x)-P<=round(zz2)+EE)and(round(x)-P>=round(zz2)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(rr2)-EE)and(round(y)+P<=round(rr2)+EE)and(round(x)+P>=round(zz2)-EE)and(round(x)+P<=round(zz2)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(rr2)+EE)and(round(y)-P>=round(rr2)-EE)and(round(x)-P<=round(zz2)+EE)and(round(x)-P>=round(zz2)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+        #Enemy 1 Left collision
+            if ((round(y)-P<=round(o)+EE)and(round(y)-P>=round(o)-EE)and(round(x)-P<=round(u)+EE)and(round(x)-P>=round(u)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(o)-EE)and(round(y)+P<=round(o)+EE)and(round(x)+P>=round(u)-EE)and(round(x)+P<=round(u)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(o)+EE)and(round(y)-P>=round(o)-EE)and(round(x)-P<=round(u)+EE)and(round(x)-P>=round(u)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+        #Enemy 2 Left collision
+            if ((round(y)-P<=round(o1)+EE)and(round(y)-P>=round(o1)-EE)and(round(x)-P<=round(u1)+EE)and(round(x)-P>=round(u1)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(o1)-EE)and(round(y)+P<=round(o1)+EE)and(round(x)+P>=round(u1)-EE)and(round(x)+P<=round(u1)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(o1)+EE)and(round(y)-P>=round(o1)-EE)and(round(x)-P<=round(u1)+EE)and(round(x)-P>=round(u1)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+        #Enemy 3 Left collision
+            if ((round(y)-P<=round(o2)+EE)and(round(y)-P>=round(o2)-EE)and(round(x)-P<=round(u2)+EE)and(round(x)-P>=round(u2)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(o2)-EE)and(round(y)+P<=round(o2)+EE)and(round(x)+P>=round(u2)-EE)and(round(x)+P<=round(u2)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(o2)+EE)and(round(y)-P>=round(o2)-EE)and(round(x)-P<=round(u2)+EE)and(round(x)-P>=round(u2)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+        #Enemy 1 Down collision
+            if ((round(y)-P<=round(oo)+EE)and(round(y)-P>=round(oo)-EE)and(round(x)-P<=round(uu)+EE)and(round(x)-P>=round(uu)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(oo)-EE)and(round(y)+P<=round(oo)+EE)and(round(x)+P>=round(uu)-EE)and(round(x)+P<=round(uu)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(oo)+EE)and(round(y)-P>=round(oo)-EE)and(round(x)-P<=round(uu)+EE)and(round(x)-P>=round(uu)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+        #Enemy 2 Down collision
+            if ((round(y)-P<=round(oo1)+EE)and(round(y)-P>=round(oo1)-EE)and(round(x)-P<=round(uu1)+EE)and(round(x)-P>=round(uu1)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(oo1)-EE)and(round(y)+P<=round(oo1)+EE)and(round(x)+P>=round(uu1)-EE)and(round(x)+P<=round(uu1)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(oo1)+EE)and(round(y)-P>=round(oo1)-EE)and(round(x)-P<=round(uu1)+EE)and(round(x)-P>=round(uu1)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+        #Enemy 3 Down collision
+            if ((round(y)-P<=round(oo2)+EE)and(round(y)-P>=round(oo2)-EE)and(round(x)-P<=round(uu2)+EE)and(round(x)-P>=round(uu2)-EE)):
+                HT = HT
+                print(HT)
+                #Right
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)+P>=round(oo2)-EE)and(round(y)+P<=round(oo2)+EE)and(round(x)+P>=round(uu2)-EE)and(round(x)+P<=round(uu2)+EE)):
+                HT = HT
+                print(HT)
+                #Left
+                print("Seconds")
+                Blue = "White"
+            elif ((round(y)-P<=round(oo2)+EE)and(round(y)-P>=round(oo2)-EE)and(round(x)-P<=round(uu2)+EE)and(round(x)-P>=round(uu2)-EE)):
+                HT = HT
+                print(HT)
+                #
+                print("Seconds")
+                Blue = "White"
+
+
+
+
+
+
+
+            if Restart == 4:
+                AA = random.uniform(-2,2)
+                LL = random.uniform(400, 500)
+                T = 0
+                Restart = 0    
+# create button for restart
+def button_handler():
+    global Restart
+    global Play
+    global How_to_Play
+    global Gold
+    global Y
+    global X
+    global Blackk
+    global x
+    global y
+    global current_key
+    global Blue
+    global E
+    global P
+    #Right
+    global z
+    global z1
+    global z2
+    global r
+    global r1
+    global r2
+    #UP
+    global zz
+    global zz1
+    global zz2
+    global rr
+    global rr1
+    global rr2
+    #Left
+    global u
+    global u1
+    global u2
+    global o
+    global o1
+    global o2
+    #Down
+    global uu
+    global uu1
+    global uu2
+    global oo
+    global oo1
+    global oo2
+    Restart = 4
+    z = 510
+    z1 = 510
+    z2 = 510
+    r = random.uniform(5, 455)
+    r1 = random.uniform(5, 455)
+    r2 = random.uniform(5, 455)
+    zz = random.uniform(5, 455)
+    zz1 = random.uniform(5, 455)
+    zz2 = random.uniform(5, 455)
+    u = -10
+    u1 = -10
+    u2 = -10
+    o = random.uniform(5, 455)
+    o1 = random.uniform(5, 455)
+    o2 = random.uniform(5, 455)
+    rr = -10
+    rr2 = -10
+    rr1 = -10
+    uu = random.uniform(5, 455)
+    uu1=random.uniform(5,455)
+    uu2=random.uniform(5,455)
+    oo= 510
+    oo1=510
+    oo2=510
+    Black = "Black"
+    Blue = "Blue"
+    x = 250
+    y = 250
+    AA = random.uniform(-2,2)
+    LL = random.uniform(400, 500)
+    Play = False
+    How_to_Play = False
+    Gold = "Black"
+    Blackk="Black"
+    X = 0
+    Y = 0
+button1 = frame.add_button('Restart', button_handler)
+# register event handlers
+frame.add_label("Click box to move", 5)
+frame.set_canvas_background('White')
+frame.set_keydown_handler(keydown)
+frame.set_keyup_handler(keyup)
+frame.set_mouseclick_handler(mouse_handler)
+frame.set_draw_handler(draw_handler)
+# start frame
+frame.start()
